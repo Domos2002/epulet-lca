@@ -732,7 +732,7 @@ table.ot { min-width: 1000px; }
       <div class="eyebrow">Épület-LCA számoló · dokumentáció</div>
       <h1>Adatforrások és módszertan</h1>
       <p class="lead">Ez az oldal leírja, honnan származik a program minden adata, milyen képletekkel számol, mire alapulnak a javasolt alapértékek, és hol vannak a korlátai. A program minden változásakor frissül; a legutóbbi változások a lap alján, a változásnaplóban vannak.</p>
-      <p class="muted">Dokumentáció állapota: <b>2026. október 28.</b> · programverzió: <b>v20</b></p>
+      <p class="muted">Dokumentáció állapota: <b>2026. október 28.</b> · programverzió: <b>v21</b></p>
     </header>
 
     <nav class="toc" aria-label="Tartalom">
@@ -771,7 +771,8 @@ table.ot { min-width: 1000px; }
       <ul>
         <li><b>Értékek:</b> modulonként (A1–A3 … D) és indikátoronként (GWP összes, fosszilis, biogén, földhasználat), kg CO₂e / deklarált egység, pontosan az EPD szerint. A tizedesvesszőt és az exponenciális alakot (pl. 1,23E-02) a program tizedes törtté alakítja; „MND” vagy üres mező = nincs adat. Ha csak A1, A2, A3 van megadva, az A1–A3 ezek összege.</li>
         <li><b>EPD feltöltése PDF-ként:</b> a program a feltöltött EPD PDF szövegét a böngészőben olvassa ki (pdf.js 4.10.38, Mozilla; a fájl nem kerül fel sehová, és nem tárolódik), a táblázatsorokat egyben tartva, legfeljebb 60 oldalig. Szkennelt (kép alapú) PDF-ből szöveg nem olvasható ki; ilyenkor a szöveget kézzel kell bemásolni vagy az űrlapot kitölteni.</li>
-        <li><b>Automatikus kitöltés:</b> a kiolvasott (vagy kézzel bemásolt) szövegből a Claude nyelvi modell tölti ki az űrlapot, a német és angol indikátorneveket is felismerve (kért szabály: a számokat változtatás nélkül átvenni, nem kerekíteni, hiányzó adatot nem kitalálni). A kitöltött mezők jelölve vannak, és mentés előtt az EPD-vel ellenőrizni kell őket; a saját anyag adatlapja jelzi, ha az adatok így kerültek be.</li>
+        <li><b>Beépített kiolvasó (MI nélkül):</b> a program a szövegben megkeresi az EN 15804 eredménytáblázat fejlécét (modulok: A1–A3 vagy A1, A2, A3 külön, A4 … D), majd a GWP-sorokat (összes, fosszilis, biogén, földhasználat; angol, német és magyar elnevezéssel, a GWP-GHG sort kihagyva), és az értékeket a fejléc oszlopaihoz rendeli a szöveg vízszintes helyzete, illetve a sorrend alapján. Az „MND/ND” jelölésű modulok üresen maradnak. Ugyanígy keresi a regisztrációs számot, a programüzemeltetőt, az érvényességet, a szabványt (A1/A2), a deklarált egységet, a testsűrűséget vagy a felületi tömeget, a gyártót és a terméknevet (az első oldal legnagyobb betűs sora). Ingyenes, internet és MI nélkül fut; szokatlan táblázatszerkezetnél tévedhet, ezért az eredményt ellenőrizni kell.</li>
+        <li><b>Automatikus kitöltés MI-vel (ha elérhető):</b> ha a beépített kiolvasó nem talál táblázatot, vagy a „Kitöltés MI-vel” gombra kattintasz, a kiolvasott (vagy kézzel bemásolt) szövegből a Claude nyelvi modell tölti ki az űrlapot, a német és angol indikátorneveket is felismerve (kért szabály: a számokat változtatás nélkül átvenni, nem kerekíteni, hiányzó adatot nem kitalálni). A kitöltött mezők jelölve vannak, és mentés előtt az EPD-vel ellenőrizni kell őket; a saját anyag adatlapja jelzi, ha az adatok így kerültek be.</li>
         <li><b>Számítás:</b> a saját anyagokra ugyanazok a képletek és javasolt alapértékek (élettartam, szállítás, hulladék, szerkezeti csoport) vonatkoznak, mint az ÖKOBAUDAT-anyagokra; az adattípus „Saját anyag”.</li>
         <li><b>Felelősség:</b> a saját anyagok értékeinek helyességéért a felvivő felel; a program csak formai ellenőrzést végez (szám-e, van-e A1–A3).</li>
         <li><b>Tárolás:</b> a fiókhoz kötött, csak a felhasználó által látható tárhelyen (vagy a böngészőben). Projektben használt saját anyag nem törölhető.</li>
@@ -958,6 +959,7 @@ table.ot { min-width: 1000px; }
 
     <section id="d13"><h2>13. Változásnapló</h2>
       <table class="dt"><thead><tr><th>Verzió</th><th>Dátum</th><th>Változás</th></tr></thead><tbody>
+        <tr><td>v21</td><td>2026-11-18</td><td>Beépített EPD-kiolvasó MI nélkül: a feltöltött EPD PDF eredménytáblázatából a GWP-értékek modulonként, valamint a regisztrációs szám, programüzemeltető, érvényesség, szabvány, deklarált egység, tömeg, gyártó és terméknév automatikusan bekerül; az MI csak tartalék vagy külön gombbal kérhető.</td></tr>
         <tr><td>v20</td><td>2026-11-18</td><td>Saját EPD feltöltése PDF-ként: a program kiolvassa a PDF szövegét, és automatikusan kitölti a saját anyag adatlapját (név, gyártó, ország, deklarált egység, tömeg, regisztrációs szám, érvényesség, GWP-értékek modulonként); „EPD feltöltése (PDF)” gomb a Saját anyagok oldalon, behúzás is működik; a kitöltött mezők lila kerettel jelölve; a keresőben „Nincs találat” esetén hivatkozás a feltöltésre.</td></tr>
         <tr><td>v19</td><td>2026-11-18</td><td>Önálló változat: Windows-program (Electron) és webes változat (GitHub Pages) közös felhős tárhellyel (Supabase), e-mailes belépéssel, minden eszközön ugyanazokkal a projektekkel; automatikus frissítés (a program tartalma minden indításkor, az .exe a GitHub-kiadásokból); értesítés futás közben megjelenő új változatról; az MI-funkciók saját API-kulccsal.</td></tr>
         <tr><td>v18</td><td>2026-10-28</td><td>Épületkép: projektenként feltölthető kép (fájlválasztó vagy behúzás), a projekt tetején borítósávként a névvel, a fő eredménnyel és a besorolással; függőleges kivágás igazítása; bélyegkép a kezdőlap kártyáin; a kép a szakvélemény címlapján is megjelenik. A kép tömörítve (kb. 1800 px, legfeljebb ~150 KB), a projekttől külön dokumentumban mentődik.</td></tr>
@@ -1024,7 +1026,7 @@ table.ot { min-width: 1000px; }
 <div class="drawer-bg" id="drawer-bg" hidden></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title" hidden></aside>
 
-<script>window.LCA_CONFIG = {"supabaseUrl": "https://fzgypamwvifbqhuwutmi.supabase.co", "supabaseKey": "sb_publishable_ZD1zMDZ28mVyuPVHsWvMsQ_tg32PrYq", "siteUrl": "https://domos2002.github.io/epulet-lca/", "version": "2026.11.18-2102"};</script>
+<script>window.LCA_CONFIG = {"supabaseUrl": "https://fzgypamwvifbqhuwutmi.supabase.co", "supabaseKey": "sb_publishable_ZD1zMDZ28mVyuPVHsWvMsQ_tg32PrYq", "siteUrl": "https://domos2002.github.io/epulet-lca/", "version": "2026.11.18-2123"};</script>
 <script>
 /* Épület-LCA – platformréteg az önálló (asztali és webes) változathoz.
  * Ugyanazt a felületet adja, amit a program a Claude-oldalon kap (window.claude.use):
@@ -2878,6 +2880,181 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
         `<div class="btns"><button class="btn" type="button" data-cm-edit="${m.id}">Szerkesztés</button><button class="btn" type="button" data-cm-del="${m.id}">Törlés</button></div></div>`;
     }).join("");
   }
+  // ---------- EPD-kiolvasó MI nélkül: az EN 15804 eredménytáblázat és az alapadatok felismerése a PDF szövegéből
+  // Bemenet: oldalak → sorok → szövegdarabok, x-pozícióval (pdf.js getTextContent alapján), vagy bemásolt szöveg.
+  // Kimenet: ugyanaz a szerkezet, mint az MI-s kitöltésé ({ name, manufacturer, …, values: { "A1-A3": { t, f, b, l } } }).
+  const EPD_MODS = ["A1-A3", "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "C1", "C2", "C3", "C4", "D"];
+  const EPD_NUM = /^[-+−–]?(\d{1,3}([ .]\d{3})+|\d+)?([.,]\d+)?([eE][-+−–]?\d+)?$/;
+  const EPD_ND = /^(mnd|mna|mnr|nd|nr|na|n\/a|n\.a\.|n\.d\.|inA|x|-|–|—|\*)$/i;
+  function epdNormMinus(s) { return String(s).replace(/[−‒–—](?=\s*\d)/g, "-"); }
+  // egy szövegdarab → modulcímke(k)
+  function epdModTokens(s) {
+    const out = [];
+    let x = String(s).replace(/[‐‑‒–—−]/g, "-").replace(/\s*-\s*/g, "-").toUpperCase();
+    // "A1-A3", "A1-3", "A1–A3"
+    const re = /\b(A1-A?3|A[1-5]|B[1-7]|C[1-4]|D)\b/g; let mm;
+    while ((mm = re.exec(x))) out.push({ mod: /^A1-/.test(mm[1]) ? "A1-A3" : mm[1], at: mm.index / Math.max(1, x.length) });
+    return out;
+  }
+  function epdIsNumTok(s) { const t = epdNormMinus(String(s).trim()); return t !== "" && EPD_NUM.test(t) && /\d/.test(t); }
+  function epdNum(s) {
+    let t = epdNormMinus(String(s).trim()).replace(/\s/g, "");
+    if (!t || EPD_ND.test(t)) return "";
+    // ezres elválasztó nélküli egyszerű eset: tizedesvessző → pont
+    if (/^[-+]?\d+,\d+([eE][-+]?\d+)?$/.test(t)) t = t.replace(",", ".");
+    else if (/^[-+]?\d{1,3}(\.\d{3})+,\d+$/.test(t)) t = t.replace(/\./g, "").replace(",", ".");
+    else if (/^[-+]?\d{1,3}(,\d{3})+\.\d+$/.test(t)) t = t.replace(/,/g, "");
+    if (/^[-+]?\d*\.?\d+e[-+]?\d+$/i.test(t)) { const v = Number(t); return isFinite(v) ? String(v) : ""; }
+    return /^[-+]?\d*\.?\d+$/.test(t) ? t.replace(/^\+/, "") : "";
+  }
+  // melyik GWP-sor? t/f/b/l, vagy null
+  function epdIndicator(label) {
+    const s = String(label).toLowerCase().replace(/[‐‑‒–—−]/g, "-").replace(/\s+/g, " ");
+    if (/ghg|ipcc|excl|exkl|ohne biogen|without biogenic/.test(s)) return null;       // GWP-GHG és hasonló származtatott sorok kimaradnak
+    const gwp = /gwp|erwärm|erwarm|warming|klimawandel|climate change|felmeleged|klímaváltoz/.test(s);
+    if (!gwp) return null;
+    if (/luluc|land use|landnutz|land-use|földhaszn|gwp-?\s*l\b/.test(s)) return "l";
+    if (/biogen|biogén|gwp-?\s*b\b/.test(s)) return "b";
+    if (/fossil|fosszil|gwp-?\s*f\b/.test(s)) return "f";
+    if (/total|gesamt|összes|teljes|gwp-?\s*t\b|gwp-?\s*tot/.test(s)) return "t";
+    if (/^\W*(gwp|global warming potential|globales erwärmungspotenzial|treibhauspotenzial)\W*(\(|\[|kg|$)/.test(s) || /^gwp\b(?!-)/.test(s.trim())) return "t0"; // A1-es EPD: egyetlen GWP-sor
+    return null;
+  }
+  // sorok: [{ items: [{x, w, s, h}] }]; a cellákat (szövegdarabokat) szóközzel tagolt tokenekre bontjuk, becsült x-szel
+  function epdTokens(row) {
+    const out = [];
+    row.items.forEach(it => {
+      const parts = String(it.s).split(/(\s+)/); let off = 0; const len = Math.max(1, String(it.s).length);
+      parts.forEach(p => { if (p.trim()) out.push({ s: p, x: it.x + (off + p.length / 2) / len * (it.w || len) }); off += p.length; });
+    });
+    return out;
+  }
+  function epdParseTables(pages) {
+    const res = {}; let found = 0, header = null, headerPage = -1, a1only = false;
+    const put = (k, mod, v) => { res[mod] = res[mod] || {}; if (res[mod][k] == null) { res[mod][k] = v; found++; } };
+    pages.forEach((pg, pi) => {
+      const rows = pg.rows;
+      for (let ri = 0; ri < rows.length; ri++) {
+        const row = rows[ri], toks = epdTokens(row);
+        // fejléc: legalább 3 modulcímke, és alig van benne szám
+        const mods = []; toks.forEach(t => epdModTokens(t.s).forEach(m => mods.push({ mod: m.mod, x: t.x })));
+        const nums = toks.filter(t => epdIsNumTok(t.s)).length;
+        if (mods.length >= 3 && new Set(mods.map(m => m.mod)).size >= 3 && nums <= 1) {
+          // A1, A2, A3 külön oszlop mellett az "A1-A3" is lehet
+          header = mods.filter((m, i, a) => a.findIndex(z => z.mod === m.mod) === i).sort((a, b) => a.x - b.x); headerPage = pi;
+          // "A1-" és "A3" külön darabban: egy A1–A3 oszlop
+          const hm = new Set(header.map(h => h.mod));
+          if (hm.has("A1") && hm.has("A3") && !hm.has("A2") && !hm.has("A1-A3")) { const a1 = header.find(h => h.mod === "A1"), a3 = header.find(h => h.mod === "A3"); header = header.filter(h => h !== a3); a1.mod = "A1-A3"; a1.x = (a1.x + a3.x) / 2; }
+          continue;
+        }
+        if (!header || pi - headerPage > 1) continue;
+        // értékek: számok és "MND"-jelölések a címke után
+        const valToks = toks.filter(t => epdIsNumTok(t.s) || EPD_ND.test(epdNormMinus(t.s.trim())));
+        if (valToks.length < 2) continue;
+        let label = toks.filter(t => !valToks.includes(t)).map(t => t.s).join(" ");
+        let ind = epdIndicator(label);
+        // a címke lehet az előző (szám nélküli) sor(ok)ban is, ha a táblázatcella többsoros
+        for (let back = 1; !ind && back <= 2 && ri - back >= 0; back++) {
+          const prev = epdTokens(rows[ri - back]); if (prev.some(t => epdIsNumTok(t.s))) break;
+          label = prev.map(t => t.s).join(" ") + " " + label; ind = epdIndicator(label);
+        }
+        if (!ind && ri + 1 < rows.length) { const nx = epdTokens(rows[ri + 1]); if (!nx.some(t => epdIsNumTok(t.s))) ind = epdIndicator(label + " " + nx.map(t => t.s).join(" ")); }
+        if (!ind) continue;
+        if (ind === "t0") { ind = "t"; a1only = true; }
+        // a címkén belüli számok (pl. "CO2", "11" a "CFC11"-ben) nem értékek: csak a fejléc első oszlopa előttinél jobbra lévőket nézzük
+        const firstX = header[0].x, gap = header.length > 1 ? (header[header.length - 1].x - header[0].x) / (header.length - 1) : 40;
+        const vals = valToks.length === header.length ? valToks : valToks.filter(t => t.x > firstX - gap * 0.6);
+        if (!vals.length) continue;
+        if (vals.length === header.length) vals.forEach((t, i) => { const v = epdNum(t.s); if (v !== "") put(ind, header[i].mod, v); });
+        else vals.forEach(t => {
+          let best = null, bd = 1e9; header.forEach(h => { const d = Math.abs(h.x - t.x); if (d < bd) { bd = d; best = h; } });
+          if (best && bd < gap * 0.6) { const v = epdNum(t.s); if (v !== "") put(ind, best.mod, v); }
+        });
+      }
+    });
+    return { values: res, found, a1only };
+  }
+  function epdFindAfter(text, labels, maxLen) {
+    for (const re of labels) {
+      const m = text.match(new RegExp("(?:" + re + ")\\s*[:|]?\\s*(?:\\|\\s*)?([^\\n|]{2," + (maxLen || 120) + "})", "i"));
+      if (m && m[1].trim()) return m[1].trim();
+    }
+    return "";
+  }
+  const EPD_OPS = [[/institut bauen und umwelt|\bibu\b/i, "IBU"], [/environdec|epd international/i, "EPD International"], [/(^|[^\p{L}])émi([^\p{L}]|$)|építésügyi minőségellenőrző/iu, "ÉMI"], [/bau epd/i, "Bau EPD GmbH"],
+    [/epd[- ]norge/i, "EPD-Norge"], [/kiwa/i, "Kiwa"], [/\binies\b/i, "INIES"], [/\bitb\b|instytut techniki budowlanej/i, "ITB"], [/epd danmark/i, "EPD Danmark"], [/aenor|global ?epd/i, "AENOR GlobalEPD"],
+    [/ul environment|ul solutions/i, "UL Environment"], [/ift rosenheim/i, "ift Rosenheim"], [/\brts\b|rakennustieto/i, "RTS"], [/\bepd italy\b/i, "EPD Italy"], [/smart epd/i, "Smart EPD"], [/cscb|declare/i, ""]];
+  const EPD_CAT = [[/dämm|insulat|szigetel|mineralwoll|steinwoll|glaswoll|eps\b|xps\b|polystyr|pur\b|pir\b|kőzetgyapot|üveggyapot/i, "Hőszigetelő anyagok"],
+    [/holz|wood|timber|clt|brettsperr|osb|fa\b|faanyag|lumber|glulam/i, "Fa"], [/stahl|steel|alumin|kupfer|copper|zink|zinc|metal|acél|fém/i, "Fémek"],
+    [/fenster|window|glas|glazing|curtain|ablak|üveg|tür\b|door/i, "Nyílászárók és függönyfalak"], [/fliese|tile|parkett|bodenbelag|floor|carpet|burkolat|csempe|laminat/i, "Burkolatok"],
+    [/pvc|kunststoff|plastic|polyeth|polyprop|műanyag|membran|folie|bitumen/i, "Műanyagok"],
+    [/ziegel|brick|beton|concrete|zement|cement|mörtel|mortar|putz|plaster|gips|gypsum|kalksand|porenbeton|tégla|falaz|habarcs|vakolat|gipsz|estrich|screed|stein|stone|porotherm|ytong/i, "Ásványi építőanyagok"],
+    [/heiz|wärmepumpe|lüftung|pipe|rohr|kabel|cable|boiler|hvac|gépész/i, "Épületgépészet"]];
+  function parseEpd(pages, plainText) {
+    const text = (plainText || "").replace(/\r/g, "");
+    const tab = epdParseTables(pages);
+    const r = { values: tab.values };
+    // regisztrációs szám
+    let rn = epdFindAfter(text, ["deklarationsnummer", "declaration number", "registration number", "epd registration number", "regisztrációs szám", "epd number", "epd no\\.?", "número de registro"], 60);
+    if (rn) rn = (rn.match(/[A-Z0-9][A-Z0-9\-_.\/ ]{4,}[A-Z0-9]/i) || [rn])[0].trim();
+    if (!rn) { const m = text.match(/\b(EPD[-_ ][A-Z0-9][A-Z0-9\-_.\/]{5,}|S-P-\d{4,6}|NEPD-\d{3,6}-[\w-]+)/); if (m) rn = m[1]; }
+    r.reg_number = rn.replace(/\s+/g, " ").slice(0, 60);
+    // programüzemeltető
+    for (const [re, name] of EPD_OPS) if (name && re.test(text)) { r.program_operator = name; break; }
+    // érvényesség
+    const vt = epdFindAfter(text, ["gültig bis", "valid until", "valid to", "validity", "expiry date", "expiration date", "érvényes(?:ség)?(?: vége| -ig)?", "date of expiry", "valable jusqu'au"], 40);
+    const y = (vt.match(/20[2-4]\d/g) || [])[0] || ((text.match(/(?:valid|gültig|érvény)[^\n]{0,60}?(20[2-4]\d)/i) || [])[1]) || "";
+    r.valid_until_year = y;
+    // szabvány
+    r.standard = /15804\s*\+\s*A2|15804:2012\s*\+\s*A2|\+A2:2019/i.test(text) ? "A2" : /15804\s*\+\s*A1|15804:2012\s*\+\s*A1|\+A1:2013/i.test(text) ? "A1" : (tab.a1only ? "A1" : "A2");
+    // deklarált egység
+    const du = epdFindAfter(text, ["deklarierte einheit", "declared unit", "functional unit", "funktionale einheit", "deklarált egység", "funkcionális egység", "unité déclarée"], 80);
+    const um = du.match(/(\d+(?:[.,]\d+)?)\s*(m³|m3|cbm|kubikmeter|cubic met(?:re|er)|m²|m2|qm|square met(?:re|er)|tonnes?|tons?|\bt\b|kg|kilogram|lfm|laufmeter|linear met(?:re|er)|m\b|stück|stk|piece|pcs|unit|db)/i);
+    if (um) {
+      let amt = Number(um[1].replace(",", ".")), u = um[2].toLowerCase();
+      let unit = /m³|m3|cbm|kubik|cubic/.test(u) ? "m3" : /m²|m2|qm|square/.test(u) ? "m2" : /^t$|tonne|ton/.test(u) ? "t" : /kg|kilogram/.test(u) ? "kg" : /lfm|laufm|linear|^m$/.test(u) ? "m" : "pcs";
+      if (unit === "t") { unit = "kg"; amt *= 1000; }
+      r.declared_unit = unit; r.declared_amount = String(amt);
+    }
+    // tömeg a deklarált egységre
+    const num = s => { const m = String(s || "").match(/(\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,](\d+))?/); return m ? Number(m[1].replace(/[ .]/g, "") + (m[2] ? "." + m[2] : "")) : null; };
+    if (r.declared_unit === "m3") {
+      const d = epdFindAfter(text, ["bruttorohdichte", "rohdichte", "gross density", "bulk density", "density", "dichte", "testsűrűség", "sűrűség"], 40);
+      const v = /kg\s*\/\s*m(?:³|3)/i.test(d) || /^\s*\d/.test(d) ? num(d) : null;
+      if (v && v > 5 && v < 10000) r.mass_kg_per_declared_unit = String(v * Number(r.declared_amount || 1));
+    } else if (r.declared_unit === "m2") {
+      const d = epdFindAfter(text, ["flächengewicht", "flächenbezogene masse", "area weight", "mass per unit area", "surface weight", "grammage", "felületi tömeg", "négyzetméter-tömeg"], 40);
+      const v = num(d); if (v && v > 0.01 && v < 5000) r.mass_kg_per_declared_unit = String(v * Number(r.declared_amount || 1));
+    }
+    // gyártó
+    let mk = epdFindAfter(text, ["deklarationsinhaber", "owner of the declaration", "declaration owner", "epd owner", "manufacturer", "hersteller", "gyártó", "a nyilatkozat tulajdonosa", "company"], 90);
+    mk = mk.replace(/\s{2,}.*/, "").replace(/\b((?:gmbh|ag|kg|ltd|inc|zrt|nyrt|kft|bt|ab|oy|spa|a\/s|s\.a|s\.r\.o|sp\. z o\.o)\.?)(?:[\s,;].*)?$/i, "$1").trim();
+    r.manufacturer = mk.length > 2 && !/^(the|der|die|das)$/i.test(mk) ? mk.slice(0, 80) : "";
+    // terméknév: az első oldal(ak) legnagyobb betűs, nem általános sora
+    const generic = /umwelt-?produktdeklaration|environmental product declaration|epd\b|iso 14025|en 15804|környezeti terméknyilatkozat|declaration|deklaration|programme|programm|institut|operator|herausgeber|issue|owner|inhaber|gültig|valid|nummer|number|^\W*$/i;
+    let best = null;
+    pages.slice(0, 2).forEach((pg, pi) => pg.rows.forEach(row => {
+      const s = row.items.map(i => i.s).join(" ").replace(/\s+/g, " ").trim(), h = Math.max(...row.items.map(i => i.h || 0));
+      if (s.length < 3 || s.length > 120 || generic.test(s) || /\d{4}-\d{2}|\d+[.,]\d+E/.test(s) || (r.manufacturer && s.includes(r.manufacturer))) return;
+      const score = h * (pi === 0 ? 1.15 : 1);
+      if (!best || score > best.score + 0.5) best = { s, score };
+    }));
+    r.name = best ? best.s.replace(/^[-–•\s]+/, "") : "";
+    // ország a regisztrációs szám végéből (pl. …-DE), különben üres
+    const cc = (r.reg_number.match(/-(DE|AT|HU|CH|PL|CZ|SK|IT|FR|NL|BE|DK|SE|NO|FI|ES|PT|GB|IE|SI|HR|RO)$/i) || [])[1];
+    r.country = cc ? cc.toUpperCase() : "";
+    // kategória a név alapján
+    const nm = (r.name + " " + (pages[0] ? pages[0].rows.slice(0, 12).map(x => x.items.map(i => i.s).join(" ")).join(" ") : ""));
+    // a névben legkorábban előforduló anyagszó dönt (pl. „Planziegel … mit Mineralwolle” → tégla)
+    r.category = ""; let catAt = 1e9;
+    for (const [re, c] of EPD_CAT) { const m = nm.match(re); if (m && m.index < catAt) { catAt = m.index; r.category = c; } }
+    r.found = tab.found;
+    return r;
+  }
+  // bemásolt szövegből sorok (x = a token sorszáma; a szóköz/„|” tagolású táblázatokra elég)
+  function textToPages(text) {
+    return [{ rows: String(text || "").split(/\n/).map(line => ({ items: line.split(/\s*\|\s*|\t+|\s{2,}/).filter(s => s.trim()).map((s, i) => ({ x: i * 50, w: 40, s, h: 10 })) })).filter(r => r.items.length) }];
+  }
   // --- EPD PDF beolvasása (pdf.js, a böngészőben; a fájl nem kerül feltöltésre sehova)
   let cmPasteTxt = "", cmPasteOpen = false, pdfjsP = null;
   const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/";
@@ -2889,7 +3066,7 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
   async function pdfToText(file, onPage) {
     const lib = await loadPdfJs();
     const doc = await lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise;
-    const n = Math.min(doc.numPages, 60), out = [];
+    const n = Math.min(doc.numPages, 60), out = [], struct = [];
     for (let i = 1; i <= n; i++) {
       if (onPage) onPage(i, n);
       const pg = await doc.getPage(i), tc = await pg.getTextContent();
@@ -2900,13 +3077,14 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
         const y = it.transform[5], x = it.transform[4];
         let r = rows.find(r => Math.abs(r.y - y) < Math.max(2, (it.height || 8) * 0.45));
         if (!r) { r = { y, items: [] }; rows.push(r); }
-        r.items.push({ x, s: it.str, w: it.width || 0 });
+        r.items.push({ x, s: it.str, w: it.width || 0, h: it.height || Math.abs(it.transform[3]) || 0 });
       });
       rows.sort((a, b) => b.y - a.y);
       const lines = rows.map(r => { r.items.sort((a, b) => a.x - b.x); let s = "", end = null; r.items.forEach(it => { s += end == null ? it.s : (it.x - end > 6 ? " | " : (/\s$/.test(s) ? "" : " ")) + it.s; end = it.x + it.w; }); return s; });
       out.push(`--- ${i}. oldal ---\n` + lines.join("\n"));
+      struct.push({ rows });
     }
-    return { text: out.join("\n\n"), pages: doc.numPages };
+    return { text: out.join("\n\n"), pages: doc.numPages, struct };
   }
   async function readEpdPdf(file) {
     const st = $("cm-ai-st"), nm = $("cm-pdf-name");
@@ -2921,8 +3099,8 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
       const chars = r.text.replace(/--- \d+\. oldal ---/g, "").replace(/\s+/g, "").length;
       if (chars < 300) { cmPasteOpen = true; $("cm-paste-wrap").open = true; st.textContent = "A PDF-ben szinte nincs kiolvasható szöveg (valószínűleg szkennelt kép). Másold be a szöveget kézzel, vagy töltsd ki az űrlapot."; return; }
       if (r.pages > 60) st.textContent = `A PDF ${r.pages} oldalas; az első 60 oldalt olvastam be.`;
-      if (sampleFn) await aiFill();
-      else { cmPasteOpen = true; $("cm-paste-wrap").open = true; st.textContent = "A szöveget kiolvastam (lent látható). Az automatikus kitöltéshez add meg az Anthropic API-kulcsot a ⋯ menü „MI-funkciók” pontjában, majd nyomd meg a „Kitöltés a szövegből” gombot. Kulcs nélkül az értékeket a szövegből kézzel kell átvinni."; }
+      const n = parseFill(r.struct);
+      if (!n && sampleFn) await aiFill();
     } catch (e) { cmPasteOpen = true; const w = $("cm-paste-wrap"); if (w) w.open = true; st.textContent = "A PDF-et nem sikerült beolvasni" + (e && e.message ? ": " + e.message : "") + ". Másold be a szövegét kézzel."; }
   }
   function blankCustom() { return { id: Date.now(), name: "", maker: "", c1: "Ásványi építőanyagok", c: "", unit: "m3", amount: "1", mass: "", rn: "", rb: "", valid: "", url: "", std: "A2", co: "HU", note: "", vals: { t: {}, f: {}, b: {}, l: {} }, ai: false }; }
@@ -2936,10 +3114,10 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
     w.hidden = false;
     w.innerHTML = `<div class="panel-head"><h2>${exists ? "Saját anyag szerkesztése" : "Új saját anyag"}</h2><div class="btns"><button class="btn" type="button" id="cm-cancel">Mégse</button><button class="btn primary" type="button" id="cm-save">Mentés</button></div></div>` +
       (msg ? `<div class="note">${msg}</div>` : "") +
-      `<div class="cm-ai" id="cm-ai-box"><b>Automatikus kitöltés az EPD-ből</b><span class="hint">Töltsd fel az EPD PDF-jét (vagy húzd ide). A program kiolvassa a szövegét, és kitölti az űrlapot: név, gyártó, deklarált egység, tömeg, regisztrációs szám, és a GWP-értékek modulonként. A kitöltött mezőket lila keret jelzi – mentés előtt ellenőrizd őket az EPD-vel. Ha a PDF nem olvasható, a szöveget kézzel is bemásolhatod az alábbi mezőbe.</span>` +
+      `<div class="cm-ai" id="cm-ai-box"><b>Automatikus kitöltés az EPD-ből</b><span class="hint">Töltsd fel az EPD PDF-jét (vagy húzd ide). A program kiolvassa a szövegét, megkeresi az eredménytáblázatot, és kitölti az űrlapot: GWP-értékek modulonként, deklarált egység, tömeg, regisztrációs szám, érvényesség, gyártó, név. A kitöltött mezőket lila keret jelzi – mentés előtt ellenőrizd őket az EPD-vel. Ha a PDF nem olvasható, a szöveget kézzel is bemásolhatod az alábbi mezőbe.</span>` +
       `<div class="btns"><label class="btn primary cm-pdf-btn">EPD PDF kiválasztása…<input type="file" id="cm-pdf" accept="application/pdf,.pdf" hidden></label><span class="hint" id="cm-pdf-name"></span></div>` +
       `<details id="cm-paste-wrap"${cmPasteOpen ? " open" : ""}><summary>Kiolvasott / bemásolt szöveg</summary><textarea id="cm-paste" placeholder="Ide illeszd be az EPD szövegét…">${esc(cmPasteTxt)}</textarea></details>` +
-      `<div class="btns"><button class="btn" type="button" id="cm-ai-go">Kitöltés a szövegből</button><span class="hint" id="cm-ai-st" role="status"></span></div></div>` +
+      `<div class="btns"><button class="btn" type="button" id="cm-parse-go">Kitöltés a szövegből</button>${sampleFn ? `<button class="btn" type="button" id="cm-ai-go">Kitöltés MI-vel</button>` : ""}<span class="hint" id="cm-ai-st" role="status"></span></div></div>` +
       `<h3 class="sub-h">Alapadatok</h3><div class="cm-grid">` +
       f("name", "Termék neve *", { wide: true, ph: "pl. Porotherm 30 N+F falazóblokk" }) + f("maker", "Gyártó", { ph: "pl. Wienerberger Zrt." }) +
       sel("c1", "Főkategória", CM_CATS.map(c => [c, c])) + f("c", "Alkategória (szabad szöveg)", { ph: "pl. Falazóelem › Kerámia" }) +
@@ -2985,6 +3163,7 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
     if (id === "cm-cancel") { cmEdit = null; cmAi = new Set(); renderCmForm(); return; }
     if (id === "cm-save" || id === "cm-save2") return saveCm();
     if (id === "cm-ai-go") return aiFill();
+    if (id === "cm-parse-go") return parseFill();
   });
   async function saveCm() {
     const m = cmEdit, errs = [];
@@ -3009,6 +3188,35 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
     $("cm-note").textContent = ok ? `„${rec.name}” elmentve. A keresőben „Saját anyag” jelöléssel találod.` : "A mentés nem sikerült, próbáld újra.";
     search();
   }
+  // kinyert adatok → űrlap (a beépített kiolvasó és az MI is ezt használja); a kitöltött mezők lila kerettel
+  function applyFill(r, how) {
+    const m = cmEdit; cmAi = new Set();
+    const setF = (k, v) => { if (v != null && String(v).trim() !== "") { m[k] = String(v).trim(); cmAi.add(k); } };
+    setF("name", r.name); setF("maker", r.manufacturer); setF("amount", r.declared_amount);
+    if (["m3", "m2", "kg", "m", "pcs"].includes(r.declared_unit)) { m.unit = r.declared_unit; cmAi.add("unit"); }
+    setF("mass", r.mass_kg_per_declared_unit); setF("rn", r.reg_number); setF("rb", r.program_operator); setF("valid", r.valid_until_year); setF("co", r.country);
+    if (r.standard === "A1" || r.standard === "A2") m.std = r.standard;
+    if (CM_CATS.includes(r.category)) m.c1 = r.category;
+    let n = 0;
+    if (r.values && typeof r.values === "object") Object.entries(r.values).forEach(([mod, o]) => {
+      if (!CM_MODS.includes(mod) || !o) return;
+      CM_IND.forEach(([k]) => { const v = numTxt(o[k]); if (v) { m.vals[k] = m.vals[k] || {}; m.vals[k][mod] = v; cmAi.add(k + "|" + mod); n++; } });
+    });
+    m.ai = true;
+    const miss = [];
+    if (!m.vals.t || m.vals.t["A1-A3"] == null && !["A1", "A2", "A3"].some(x => m.vals.t[x] != null)) miss.push("az A1–A3 GWP-érték");
+    if (!r.name) miss.push("a termék neve"); if (!r.declared_unit) miss.push("a deklarált egység");
+    renderCmForm(`${how === "ai" ? "Az MI kitöltötte" : "A program kiolvasta"}: ${n} GWP-érték${r.reg_number ? ", regisztrációs szám" : ""}${r.declared_unit ? ", deklarált egység" : ""}${r.name ? ", név" : ""}. A lila keretes mezőket ellenőrizd az EPD-vel, mielőtt mented.` +
+      (miss.length ? ` <b>Nem találtam: ${miss.join(", ")}</b> – ezt írd be kézzel${sampleFn && how !== "ai" ? ", vagy próbáld a „Kitöltés MI-vel” gombot" : ""}.` : ""));
+    return n;
+  }
+  function parseFill(struct) {
+    const txt = ($("cm-paste").value || ""); cmPasteTxt = txt;
+    if (!txt.trim()) { $("cm-ai-st").textContent = "Előbb töltsd fel az EPD PDF-jét, vagy illeszd be a szövegét."; return 0; }
+    const r = parseEpd(struct || textToPages(txt), txt);
+    if (!r.found && !r.reg_number && !r.declared_unit) { $("cm-ai-st").textContent = "A szövegben nem találtam EPD-eredménytáblázatot (GWP-sorokat modulonként)." + (sampleFn ? " Próbáld a „Kitöltés MI-vel” gombot." : " Az értékeket írd be kézzel."); return 0; }
+    return applyFill(r, "parse");
+  }
   async function aiFill() {
     const txt = ($("cm-paste").value || "").trim(), st = $("cm-ai-st"); cmPasteTxt = $("cm-paste").value;
     if (!txt) { st.textContent = "Előbb töltsd fel az EPD PDF-jét, vagy illeszd be a szövegét."; return; }
@@ -3031,20 +3239,7 @@ EPD-szöveg:
 A szöveg PDF-ből automatikusan kiolvasott: a táblázatok cellái között " | " jel állhat, és a táblázat oszlopai a modulok (A1-A3, A4 … D) – az oszlopfejléc sorrendje szerint párosítsd az értékeket. Az indikátorok neve lehet németül is (pl. "Globales Erwärmungspotenzial – gesamt / fossil / biogen / Landnutzung", GWP-t, GWP-f, GWP-b, GWP-luluc), a számokban tizedesvessző lehet.`;
     try {
       const r = await sampleFn.json(prompt, { modelTier: "default", cache: false });
-      const m = cmEdit; cmAi = new Set();
-      const setF = (k, v) => { if (v != null && String(v).trim() !== "") { m[k] = String(v).trim(); cmAi.add(k); } };
-      setF("name", r.name); setF("maker", r.manufacturer); setF("amount", r.declared_amount);
-      if (["m3", "m2", "kg", "m", "pcs"].includes(r.declared_unit)) { m.unit = r.declared_unit; cmAi.add("unit"); }
-      setF("mass", r.mass_kg_per_declared_unit); setF("rn", r.reg_number); setF("rb", r.program_operator); setF("valid", r.valid_until_year); setF("co", r.country);
-      if (r.standard === "A1" || r.standard === "A2") m.std = r.standard;
-      if (CM_CATS.includes(r.category)) m.c1 = r.category;
-      let n = 0;
-      if (r.values && typeof r.values === "object") Object.entries(r.values).forEach(([mod, o]) => {
-        if (!CM_MODS.includes(mod) || !o) return;
-        CM_IND.forEach(([k]) => { const v = numTxt(o[k]); if (v) { m.vals[k] = m.vals[k] || {}; m.vals[k][mod] = v; cmAi.add(k + "|" + mod); n++; } });
-      });
-      m.ai = true;
-      renderCmForm(`Automatikusan kitöltve: ${n} érték. A lila keretes mezőket ellenőrizd az EPD-vel, mielőtt mented.`);
+      applyFill(r, "ai");
     } catch (e) {
       if (e && (e.code === "not_granted" || e.code === "sampling_disabled")) sampleFn = null;
       st.textContent = e && e.code === "rate_limited" ? "Most túl sok kérés ment el, próbáld újra egy perc múlva." : e && e.code === "invalid_json" ? "A szövegből nem sikerült adatot kinyerni. Próbáld csak az eredménytáblázatot bemásolni." : "A feldolgozás nem sikerült. Az űrlap kézzel is kitölthető.";
