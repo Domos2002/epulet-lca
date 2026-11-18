@@ -1,9 +1,11 @@
-# A Windows-telepítő elkészítése és kiadása (GitHub Releases). Akkor fut, ha "desktop-v…" címkét kap a tároló.
+# A Windows-telepítő elkészítése és kiadása (GitHub Releases). Akkor fut, ha a desktop/ mappa változik.
+# A kiadás verzióját a desktop/package.json "version" mezője adja (új kiadáshoz ezt kell emelni).
 # A telepített program ebből a kiadásból frissíti magát automatikusan.
 name: Asztali program (Windows)
 on:
   push:
-    tags: ["desktop-v*"]
+    branches: [main]
+    paths: ["desktop/**", ".github/workflows/desktop.yml"]
   workflow_dispatch:
 permissions:
   contents: write

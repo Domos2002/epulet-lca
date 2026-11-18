@@ -17,7 +17,7 @@
 ## Hogyan frissül?
 
 - **A program tartalma:** minden feltöltés után a GitHub Actions közzéteszi a `web/` mappát. Az asztali program minden indításkor ezt tölti be, futás közben pedig értesít, ha új változat jelent meg. Újratelepítés nem kell.
-- **Maga az .exe:** csak ritkán változik. Új kiadás a `desktop-v1.0.1` formájú címkével készül; a telepített program ezt magától letölti és újraindításkor telepíti.
+- **Maga az .exe:** csak ritkán változik. Új kiadás akkor készül, ha a `desktop/` mappa változik (a verziót a `desktop/package.json` adja); a telepített program ezt magától letölti és újraindításkor telepíti.
 
 ## Adatok
 
