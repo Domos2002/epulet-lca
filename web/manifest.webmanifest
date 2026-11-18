@@ -1,0 +1,12 @@
+{
+  "name": "Épület-LCA",
+  "short_name": "Épület-LCA",
+  "description": "Épület életciklus-elemző (LCA) – ÖKOBAUDAT-alapú CO₂-számítás",
+  "lang": "hu",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1a17",
+  "theme_color": "#1d6a5a",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }]
+}
