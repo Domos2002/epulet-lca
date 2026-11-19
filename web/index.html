@@ -449,6 +449,7 @@ footer { font-size: 13.5px; color: var(--muted); display: grid; gap: 4px; max-wi
 .cm-ai.drop { outline: 3px dashed var(--accent); outline-offset: -3px; }
 .cm-ai details summary { cursor: pointer; font-size: 14.5px; color: var(--muted); }
 .cm-pdf-btn { cursor: pointer; }
+a.btn { text-decoration: none; color: var(--ink); display: inline-flex; align-items: center; }
 .cm-vals { min-width: 620px; border-collapse: collapse; font-size: 14px; }
 .cm-vals th, .cm-vals td { padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: left; }
 .cm-vals input { width: 100%; min-width: 120px; font-family: var(--mono); font-size: 13.5px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 4px 6px; color: var(--ink); }
@@ -732,7 +733,7 @@ table.ot { min-width: 1000px; }
       <div class="eyebrow">Épület-LCA számoló · dokumentáció</div>
       <h1>Adatforrások és módszertan</h1>
       <p class="lead">Ez az oldal leírja, honnan származik a program minden adata, milyen képletekkel számol, mire alapulnak a javasolt alapértékek, és hol vannak a korlátai. A program minden változásakor frissül; a legutóbbi változások a lap alján, a változásnaplóban vannak.</p>
-      <p class="muted">Dokumentáció állapota: <b>2026. október 28.</b> · programverzió: <b>v22</b></p>
+      <p class="muted">Dokumentáció állapota: <b>2026. október 28.</b> · programverzió: <b>v22.1</b></p>
     </header>
 
     <nav class="toc" aria-label="Tartalom">
@@ -960,6 +961,7 @@ table.ot { min-width: 1000px; }
 
     <section id="d13"><h2>13. Változásnapló</h2>
       <table class="dt"><thead><tr><th>Verzió</th><th>Dátum</th><th>Változás</th></tr></thead><tbody>
+        <tr><td>v22.1</td><td>2026-11-19</td><td>Közvetlen ugrás az ECO Portalra: „ECO Portal megnyitása” gomb a Saját anyagok oldalon, és az anyagkeresőben „Gyártói EPD az ECO Portalon” hivatkozás a beírt keresőszóval (új lapon nyílik).</td></tr>
         <tr><td>v22</td><td>2026-11-19</td><td>Az ECO Portalról letöltött EPD-adatcsomagok (JSON, ILCD+EPD) közvetlen, pontos beolvasása; egyszerre több fájl importálása; az anyag forrásaként „ECO Portal (ILCD+EPD)” és az eredeti EPD hivatkozása.</td></tr>
         <tr><td>v21</td><td>2026-11-18</td><td>Beépített EPD-kiolvasó MI nélkül: a feltöltött EPD PDF eredménytáblázatából a GWP-értékek modulonként, valamint a regisztrációs szám, programüzemeltető, érvényesség, szabvány, deklarált egység, tömeg, gyártó és terméknév automatikusan bekerül; az MI csak tartalék vagy külön gombbal kérhető.</td></tr>
         <tr><td>v20</td><td>2026-11-18</td><td>Saját EPD feltöltése PDF-ként: a program kiolvassa a PDF szövegét, és automatikusan kitölti a saját anyag adatlapját (név, gyártó, ország, deklarált egység, tömeg, regisztrációs szám, érvényesség, GWP-értékek modulonként); „EPD feltöltése (PDF)” gomb a Saját anyagok oldalon, behúzás is működik; a kitöltött mezők lila kerettel jelölve; a keresőben „Nincs találat” esetén hivatkozás a feltöltésre.</td></tr>
@@ -997,7 +999,7 @@ table.ot { min-width: 1000px; }
       <h1>Saját anyagok</h1>
       <div class="src">Saját EPD-k és egyéb adatok – a fiókodban tárolva, minden projektben elérhetők</div>
     </div>
-    <div class="btns"><button class="btn primary" id="cm-new-pdf" type="button">EPD feltöltése (PDF vagy JSON)</button><button class="btn" id="cm-new" type="button">+ Új anyag kézzel</button><input type="file" id="cm-pdf-top" accept="application/pdf,.pdf,application/json,.json" multiple hidden></div>
+    <div class="btns"><a class="btn" href="https://portal.eco-platform.org/search" target="_blank" rel="noopener" title="Új lapon nyílik meg. Keresés ingyenes; a JSON letöltéséhez ingyenes fiók kell.">ECO Portal megnyitása ↗</a><button class="btn primary" id="cm-new-pdf" type="button">EPD feltöltése (PDF vagy JSON)</button><button class="btn" id="cm-new" type="button">+ Új anyag kézzel</button><input type="file" id="cm-pdf-top" accept="application/pdf,.pdf,application/json,.json" multiple hidden></div>
   </header>
   <section class="panel" id="cm-form-wrap" hidden></section>
   <section class="panel">
@@ -1028,7 +1030,7 @@ table.ot { min-width: 1000px; }
 <div class="drawer-bg" id="drawer-bg" hidden></div>
 <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title" hidden></aside>
 
-<script>window.LCA_CONFIG = {"supabaseUrl": "https://fzgypamwvifbqhuwutmi.supabase.co", "supabaseKey": "sb_publishable_ZD1zMDZ28mVyuPVHsWvMsQ_tg32PrYq", "siteUrl": "https://domos2002.github.io/epulet-lca/", "version": "2026.11.19-1407"};</script>
+<script>window.LCA_CONFIG = {"supabaseUrl": "https://fzgypamwvifbqhuwutmi.supabase.co", "supabaseKey": "sb_publishable_ZD1zMDZ28mVyuPVHsWvMsQ_tg32PrYq", "siteUrl": "https://domos2002.github.io/epulet-lca/", "version": "2026.11.19-1415"};</script>
 <script>
 /* Épület-LCA – platformréteg az önálló (asztali és webes) változathoz.
  * Ugyanazt a felületet adja, amit a program a Claude-oldalon kap (window.claude.use):
@@ -2664,6 +2666,21 @@ table.ot { min-width: 1000px; }
   const synAlts = t => [t].concat(synRaw(t).map(norm));
   const countHits = term => { const t = norm(term); return DATA.reduce((n, d) => n + (d._s.includes(t) ? 1 : 0), 0); };
 
+  // közvetlen ugrás az ECO Portal keresőjére (új lapon; a portálon a keresés ingyenes, a letöltéshez ingyenes fiók kell)
+  const ECO_URL = "https://portal.eco-platform.org/search";
+  // a portálon az EPD-k angol vagy német névvel szerepelnek: a magyar szót a beépített szótárral angolra fordítjuk (pl. tégla → brick)
+  const ECO_EN = { beton: "concrete", transzportbeton: "ready-mix concrete", vakolat: "plaster", habarcs: "mortar", esztrich: "screed", cserep: "roof tile", ablak: "window", ajto: "door", parketta: "parquet", csempe: "ceramic tile", festek: "paint", ragaszto: "adhesive", membran: "membrane", bitumen: "bitumen", aluminium: "aluminium", rez: "copper", cink: "zinc", cement: "cement", meszhomok: "sand-lime", pórusbeton: "aerated concrete", porusbeton: "aerated concrete", gipszkarton: "plasterboard", osb: "OSB", clt: "CLT", rétegelt: "plywood", retegelt: "plywood" };
+  function ecoQuery(raw) {
+    return String(raw || "").trim().split(/\s+/).filter(Boolean).map(w => {
+      const n = norm(w); if (ECO_EN[n]) return ECO_EN[n];
+      const key = SYN[n] ? n : Object.keys(SYN).filter(k => k.length >= 3 && n.startsWith(k)).sort((a, b) => b.length - a.length)[0];
+      if (!key) return w;
+      const alts = SYN[key].filter(a => /^[a-z][a-z \-]+$/i.test(a) && a.length >= 4);
+      return alts.length ? alts[alts.length - 1] : w;
+    }).join(" ");
+  }
+  const ecoHref = q => ECO_URL + (q ? "?q=" + encodeURIComponent(ecoQuery(q)) : "");
+  const ecoLink = (q, txt) => `<a href="${ecoHref(q)}" target="_blank" rel="noopener">${txt || (q ? `Keresés az ECO Portalon: „${esc(ecoQuery(q))}”` : "ECO Portal")} ↗</a>`;
   function search() {
     const q = norm($("q").value.trim()), cat = $("f-cat").value, typ = $("f-typ").value, unit = $("f-unit").value, sort = $("f-sort").value;
     const toks = q ? q.split(/\s+/).filter(Boolean) : [];
@@ -2693,10 +2710,10 @@ table.ot { min-width: 1000px; }
     const total = hits.length; hits = hits.slice(0, LIM);
     const box = $("hits");
     if (!total) {
-      box.innerHTML = `<div class="hint" style="padding:12px 6px">Nincs találat. Nyomd meg a „Fordítás” gombot a német és angol megfelelőkért, vagy lazíts a szűrőkön. Ha van saját EPD-d az anyagról, <a href="#anyagok">töltsd fel a Saját anyagok között</a> – utána itt is megtalálod.</div>`;
+      box.innerHTML = `<div class="hint" style="padding:12px 6px">Nincs találat. Nyomd meg a „Fordítás” gombot a német és angol megfelelőkért, vagy lazíts a szűrőkön. Ha van saját EPD-d az anyagról, <a href="#anyagok">töltsd fel a Saját anyagok között</a> – utána itt is megtalálod.<br>${ecoLink($("q").value.trim())} – a portálon német vagy angol szóval keress (pl. „Ziegel”, „brick”), és az EPD JSON-ját töltsd fel a Saját anyagok között.</div>`;
       return;
     }
-    const info = `<div class="hint" style="padding:0 6px 6px">${q || cat || typ || unit || sort ? `${nf(total, 0)} találat${total > LIM ? `, az első ${LIM} látszik` : ""}` : "Generikus alapanyagok. Írj be keresőszót a teljes listához."}</div>`;
+    const info = `<div class="hint" style="padding:0 6px 6px">${q || cat || typ || unit || sort ? `${nf(total, 0)} találat${total > LIM ? `, az első ${LIM} látszik` : ""}` : "Generikus alapanyagok. Írj be keresőszót a teljes listához."}${$("q").value.trim() ? ` · ${ecoLink($("q").value.trim(), `Gyártói EPD az ECO Portalon („${esc(ecoQuery($("q").value.trim()))}”)`)}` : ""}</div>`;
     const du = d => `${(d.a || 1) !== 1 ? nf(d.a, 0) + " " : ""}${ul(d.u)}`;
     const epdBtn = d => hasEPD(d) ? `<a class="epd-link" href="${esc(epdUrl(d))}" target="_blank" rel="noopener" title="Az EPD-dokumentum megnyitása az ÖKOBAUDAT-ból">EPD ↗</a>` : "";
     if (big) {
@@ -3248,7 +3265,7 @@ Válaszolj CSAK ezzel a JSON-nal: {"de": [..], "en": [..], "tipp": ".."}
     w.hidden = false;
     w.innerHTML = `<div class="panel-head"><h2>${exists ? "Saját anyag szerkesztése" : "Új saját anyag"}</h2><div class="btns"><button class="btn" type="button" id="cm-cancel">Mégse</button><button class="btn primary" type="button" id="cm-save">Mentés</button></div></div>` +
       (msg ? `<div class="note">${msg}</div>` : "") +
-      `<div class="cm-ai" id="cm-ai-box"><b>Automatikus kitöltés az EPD-ből</b><span class="hint"><b>Legpontosabb:</b> az ECO Portalról (portal.eco-platform.org) letöltött <b>JSON</b> adatcsomag – ebből a számok pontosan, kiolvasás nélkül kerülnek be. Ha csak PDF van: töltsd fel az EPD PDF-jét (vagy húzd ide). A program kiolvassa a szövegét, megkeresi az eredménytáblázatot, és kitölti az űrlapot: GWP-értékek modulonként, deklarált egység, tömeg, regisztrációs szám, érvényesség, gyártó, név. A kitöltött mezőket lila keret jelzi – mentés előtt ellenőrizd őket az EPD-vel. Ha a PDF nem olvasható, a szöveget kézzel is bemásolhatod az alábbi mezőbe.</span>` +
+      `<div class="cm-ai" id="cm-ai-box"><b>Automatikus kitöltés az EPD-ből</b><span class="hint"><b>Legpontosabb:</b> az <a href="https://portal.eco-platform.org/search" target="_blank" rel="noopener">ECO Portalról ↗</a> letöltött <b>JSON</b> adatcsomag – ebből a számok pontosan, kiolvasás nélkül kerülnek be. Ha csak PDF van: töltsd fel az EPD PDF-jét (vagy húzd ide). A program kiolvassa a szövegét, megkeresi az eredménytáblázatot, és kitölti az űrlapot: GWP-értékek modulonként, deklarált egység, tömeg, regisztrációs szám, érvényesség, gyártó, név. A kitöltött mezőket lila keret jelzi – mentés előtt ellenőrizd őket az EPD-vel. Ha a PDF nem olvasható, a szöveget kézzel is bemásolhatod az alábbi mezőbe.</span>` +
       `<div class="btns"><label class="btn primary cm-pdf-btn">EPD PDF vagy JSON kiválasztása…<input type="file" id="cm-pdf" accept="application/pdf,.pdf,application/json,.json" hidden></label><span class="hint" id="cm-pdf-name"></span></div>` +
       `<details id="cm-paste-wrap"${cmPasteOpen ? " open" : ""}><summary>Kiolvasott / bemásolt szöveg</summary><textarea id="cm-paste" placeholder="Ide illeszd be az EPD szövegét…">${esc(cmPasteTxt)}</textarea></details>` +
       `<div class="btns"><button class="btn" type="button" id="cm-parse-go">Kitöltés a szövegből</button>${sampleFn ? `<button class="btn" type="button" id="cm-ai-go">Kitöltés MI-vel</button>` : ""}<span class="hint" id="cm-ai-st" role="status"></span></div></div>` +
